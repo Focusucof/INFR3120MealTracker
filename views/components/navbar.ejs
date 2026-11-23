@@ -1,0 +1,17 @@
+<!-- manage active page for underline and bolding -->
+<% const tab = (name) => active === name ? 'active fw-semibold border-danger' : 'border-white'; %> 
+<nav class="navbar navbar-expand border-bottom bg-white py-0">
+  <div class="container">
+    <a class="navbar-brand fs-4 fw-semibold" href="/">
+      <span class="bg-danger text-white px-2 py-1 me-2 fs-6"><i class="fa-solid fa-utensils"></i></span>
+      CalLog
+    </a>
+
+    <div class="navbar-nav align-items-center">
+      <a class="nav-link px-3 py-3 border-bottom border-2 <%= tab('home') %>" href="/">Home</a>
+      <a class="nav-link px-3 py-3 border-bottom border-2 <%= tab('meals') %>" href="/meals">Meals</a>
+      <a class="nav-link px-3 py-3 border-bottom border-2 <%= tab('about') %>" href="/about">About</a>
+      <a class="btn btn-dark rounded-0 fw-semibold px-3 py-2 ms-4" href="/meals/add">Add meal</a>
+    </div>
+  </div>
+</nav>

@@ -21,7 +21,8 @@ router.get('/add', (req, res) => {
 router.post('/add', async (req, res, next) => {
   try {
     const { mealName, mealType, date, calories, protein, carbs, fat, notes } = req.body;
-    const meal = new Meal({ mealName, mealType, date, calories, protein, carbs, fat, notes });
+    // form field is mealName but the schema calls it name
+    const meal = new Meal({ name: mealName, mealType, date, calories, protein, carbs, fat, notes });
     await meal.save();
     res.redirect('/meals');
   } catch (err) {

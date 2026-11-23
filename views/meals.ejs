@@ -23,12 +23,14 @@
                 <thead class="table-light">
                   <tr>
                     <th>Date</th>
+                    <th>Name</th>
                     <th>Meal</th>
                     <th>Calories</th>
                     <th>Protein (g)</th>
                     <th>Carbs (g)</th>
                     <th>Fat (g)</th>
                     <th>Notes</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,6 +38,7 @@
                     <tr>
                     
                       <td><%= meal.date.toLocaleDateString(undefined, { timeZone: 'UTC' }) %></td>
+                      <td><%= meal.name %></td>
                       <td class="text-capitalize"><%= meal.mealType %></td>
                       <td class="fw-semibold"><%= meal.calories %></td>
                       <!-- if data exists then show it, else show a dash -->
@@ -43,6 +46,14 @@
                       <td><%= meal.carbs ?? '-' %></td>
                       <td><%= meal.fat ?? '-' %></td>
                       <td class="text-secondary small"><%= meal.notes || '' %></td>
+                      <td class="text-end text-nowrap">
+                        <a href="/meals/<%= meal._id %>/edit" class="btn btn-sm btn-outline-dark rounded-0">Edit</a>
+                        <!-- delete has to be a form since links can only do GET -->
+                        <form action="/meals/<%= meal._id %>/delete" method="POST" class="d-inline"
+                          onsubmit="return confirm('Delete this meal?');">
+                          <button type="submit" class="btn btn-sm btn-outline-danger rounded-0">Delete</button>
+                        </form>
+                      </td>
                     </tr>
                   <% }) %>
                 </tbody>

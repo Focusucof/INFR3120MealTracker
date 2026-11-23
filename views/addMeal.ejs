@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<%- include('components/head') %>
+
+  <body class="d-flex flex-column min-vh-100">
+    <%- include('components/navbar', { active: '' }) %>
+
+      <main class="flex-grow-1">
+        <section class="container py-5" style="max-width: 640px;">
+          <h1 class="h3 fw-bold mb-4">Add a Meal</h1>
+
+          <form action="/meals/add" method="POST" class="border bg-white p-4">
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="mealName" class="form-label fw-semibold">Meal name</label>
+                <input type="text" id="mealName" name="mealName" class="form-control rounded-0" maxlength="100" required>
+              </div>
+              <div class="col-sm-6">
+                <label for="mealType" class="form-label fw-semibold">Meal type</label>
+                <select id="mealType" name="mealType" class="form-select rounded-0" required>
+                  <option value="breakfast">Breakfast</option>
+                  <option value="lunch">Lunch</option>
+                  <option value="dinner">Dinner</option>
+                  <option value="snack">Snack</option>
+                </select>
+              </div>
+
+              <div class="col-sm-6">
+                <label for="date" class="form-label fw-semibold">Date</label>
+                <!-- default to today's date -->
+                <input type="date" id="date" name="date" class="form-control rounded-0"
+                  value="<%= new Date().toLocaleDateString('en-CA') %>" required>
+              </div>
+
+              <div class="col-12">
+                <label for="calories" class="form-label fw-semibold">Calories</label>
+                <input type="number" id="calories" name="calories" class="form-control rounded-0" min="0" required>
+              </div>
+
+              <div class="col-sm-4">
+                <label for="protein" class="form-label">Protein (g)</label>
+                <input type="number" id="protein" name="protein" class="form-control rounded-0" min="0">
+              </div>
+              <div class="col-sm-4">
+                <label for="carbs" class="form-label">Carbs (g)</label>
+                <input type="number" id="carbs" name="carbs" class="form-control rounded-0" min="0">
+              </div>
+              <div class="col-sm-4">
+                <label for="fat" class="form-label">Fat (g)</label>
+                <input type="number" id="fat" name="fat" class="form-control rounded-0" min="0">
+              </div>
+
+              <div class="col-12">
+                <label for="notes" class="form-label">Notes</label>
+                <textarea id="notes" name="notes" class="form-control rounded-0" rows="3" maxlength="500"
+                  placeholder="e.g. chicken wrap from the caf"></textarea>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+              <button type="submit" class="btn btn-dark rounded-0 fw-semibold px-4">Save meal</button>
+              <a href="/meals" class="btn btn-outline-dark rounded-0 fw-semibold px-4">Cancel</a>
+            </div>
+          </form>
+        </section>
+      </main>
+
+      <%- include('components/footer') %>
+  </body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<%- include('components/head') %>
+
+  <body class="d-flex flex-column min-vh-100">
+    <%- include('components/navbar', { active: 'meals' }) %>
+
+      <main class="flex-grow-1">
+        <section class="container py-5">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 fw-bold mb-0">My Meals</h1>
+            <a class="btn btn-dark rounded-0 fw-semibold px-3" href="/meals/add">Add meal</a>
+          </div>
+
+          <!-- show message if there are no meals yet -->
+          <% if (meals.length === 0) { %>
+            <div class="border bg-white p-4 text-center text-secondary">
+              No meals logged yet. <a href="/meals/add" class="link-danger">Add your first one!</a>
+            </div>
+          <% } else { %>
+            <div class="table-responsive border bg-white">
+              <table class="table mb-0 align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Date</th>
+                    <th>Meal</th>
+                    <th>Calories</th>
+                    <th>Protein (g)</th>
+                    <th>Carbs (g)</th>
+                    <th>Fat (g)</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% meals.forEach(meal => { %>
+                    <tr>
+                    
+                      <td><%= meal.date.toLocaleDateString(undefined, { timeZone: 'UTC' }) %></td>
+                      <td class="text-capitalize"><%= meal.mealType %></td>
+                      <td class="fw-semibold"><%= meal.calories %></td>
+                      <!-- if data exists then show it, else show a dash -->
+                      <td><%= meal.protein ?? '-' %></td>
+                      <td><%= meal.carbs ?? '-' %></td>
+                      <td><%= meal.fat ?? '-' %></td>
+                      <td class="text-secondary small"><%= meal.notes || '' %></td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          <% } %>
+        </section>
+      </main>
+
+      <%- include('components/footer') %>
+  </body>
+
+</html>

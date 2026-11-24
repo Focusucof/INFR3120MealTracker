@@ -45,7 +45,7 @@ router.get('/:id/edit', async (req, res, next) => {
 router.post('/:id/edit', async (req, res, next) => {
   try {
     const { mealName, mealType, date, calories, protein, carbs, fat, notes } = req.body;
-    // runValidators so the schema rules still apply on update https://mongoosejs.com/docs/validation.html#update-validators-and-this
+    // runValidators so the schema rules still apply on update
     await Meal.findByIdAndUpdate(
       req.params.id,
       { name: mealName, mealType, date, calories, protein, carbs, fat, notes },
@@ -57,6 +57,14 @@ router.post('/:id/edit', async (req, res, next) => {
   }
 });
 
-
+/* POST delete a meal */
+router.post('/:id/delete', async (req, res, next) => {
+  try {
+    await Meal.findByIdAndDelete(req.params.id);
+    res.redirect('/meals');
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const mealSchema = new mongoose.Schema({
-  name: { type: String, required: true }, // form field is mealName but the schema calls it name too late to change
+  name: { type: String, required: true }, // form field is mealName but the schema calls it name
   mealType: {
     type: String,
     enum: ['breakfast', 'lunch', 'dinner', 'snack'], // can only be these options

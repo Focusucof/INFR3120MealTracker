@@ -14,6 +14,29 @@ CalLog is a meal tracker for logging what you eat along with its calories and nu
 - Edit a meal
 - Delete a meal (with a confirmation)
 
+## Navbar State
+
+The navbar (`views/components/navbar.ejs`) is a shared component that highlights the page you're on.
+
+Each view passes an `active` value when it includes the navbar:
+
+```js
+<%- include('components/navbar', { active: 'meals' }) %>
+```
+
+| Page | `active` value | Highlighted link |
+|---|---|---|
+| Home (`/`) | `'home'` | Home |
+| Meals (`/meals`) | `'meals'` | Meals |
+| Add / Edit Meal | `''` | none |
+
+Inside the navbar, a small helper function `tab(name)` compares each link's name to `active`:
+
+- **Active link:** gets `active fw-semibold border-danger`, so it's bold with a red underline.
+- **Other links:** get `border-white`, so their bottom border blends into the white navbar and doesn't show.
+
+Every link already has `border-bottom border-2`, so switching pages only changes the border colour and weight.
+
 ## Tech Stack
 
 - Node.js + Express
